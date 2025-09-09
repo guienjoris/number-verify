@@ -22,8 +22,6 @@ export class AppService {
       ),
     );
 
-    console.log({ response });
-
     if (response.data.valid) {
       return response.data;
     } else {
