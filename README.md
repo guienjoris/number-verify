@@ -23,7 +23,15 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Retrieve informations from a phone number.
+
+This repository is just for fun. You are responsible for what you do with it.
+
+## Configuration
+
+Use your own api key from [APILayer](https://numverify.com) and push it in your `.env` file with this name `API_LAYER_ACCESS_KEY` and follow the instructions below.
+
+The default port is `3000` you can change that by add the env variables `PORT` in `.env`.
 
 ## Project setup
 
@@ -44,31 +52,31 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Run tests
+## Routing
+
+Use this route for retrieve information from a phone number.
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+http://localhost:<your-port>/verify-number?number=<your-number>&country_code=<your-country-code>
 ```
 
-## Deployment
+`country_code` is not required for the french number because is set by default.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+The response of the request is:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
+```json
+{
+  valid: boolean;
+  number: string;
+  local_format: string;
+  international_format: string;
+  country_prefix: string;
+  country_code: string;
+  country_name: string;
+  location: string;
+  carrier: string;
+}
 ```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
 ## Resources
 
