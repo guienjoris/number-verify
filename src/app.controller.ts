@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
+import { NumVerifyResponse } from './types/num-verify.types';
 
 @Controller()
 export class AppController {
@@ -10,8 +11,11 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('verify-number/:number')
-  verifyNumber(@Param('number') number: string): Promise<string> {
-    return this.appService.verifyNumber(number);
+  @Post('verify-number')
+  verifyNumber(
+    @Query('number') number: string,
+    @Query('country_code') countryCode?: string,
+  ): Promise<string | NumVerifyResponse> {
+    return this.appService.verifyNumber(number, countryCode || 'FR');
   }
 }
